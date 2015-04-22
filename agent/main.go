@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os/exec"
 	"regexp"
+	"sync"
 )
 
 var config []byte
@@ -29,9 +30,12 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
+var rootuser = regexp.MustCompile(`(^|\n)user=root\n`)
+
 func configure(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method != "POST" {
+		log.Println("get config")
 		w.Write(config)
 		return
 	}
@@ -49,42 +53,56 @@ func configure(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
 }
 
+var loadlock sync.Mutex
+
 func load(newConfig []byte) error {
+
+	//only load one at a time
+	loadlock.Lock()
+	defer loadlock.Unlock()
+
 	if len(newConfig) == 0 {
-		return fmt.Errorf("no config")
+		return fmt.Errorf("No config")
+	}
+
+	if !rootuser.Match(newConfig) {
+		return fmt.Errorf("Config must have 'user=root' enabled")
 	}
 
 	oldConfig, err := ioutil.ReadFile("/etc/dnsmasq.conf")
 	if err != nil {
-		return fmt.Errorf("old config read failed: %s", err)
+		return fmt.Errorf("Old config read failed: %s", err)
 	}
 
 	if bytes.Compare(oldConfig, newConfig) == 0 {
-		return fmt.Errorf("no change")
+		return fmt.Errorf("No change")
 	}
 
 	if err := ioutil.WriteFile("/etc/dnsmasq.conf", newConfig, 600); err != nil {
-		return fmt.Errorf("new test config write failed: %s", err)
+		return fmt.Errorf("New config temp write failed: %s", err)
 	}
 
 	if out, err := exec.Command("dnsmasq", "--test").CombinedOutput(); err != nil {
 		//validation failed, restore old config
 		err := ioutil.WriteFile("/etc/dnsmasq.conf", oldConfig, 600)
 		if err != nil {
-			return fmt.Errorf("prev config write failed: %s", err)
+			return fmt.Errorf("Last config write failed: %s", err)
 		}
 		log.Printf("validation error")
 		return parseError(out, err)
 	}
 
 	//config validated, reload dnsmasq
-	if out, err := exec.Command("sudo", "service", "dnsmasq", "restart").CombinedOutput(); err != nil {
-		log.Printf("reload failed")
+	log.Println("restarting...")
+	if out, err := exec.Command("service", "dnsmasq", "restart").CombinedOutput(); err != nil {
+		log.Printf("reload failed: %s", out)
 		return parseError(out, err)
 	}
 
-	log.Printf("loaded config")
-	config = newConfig
+	log.Printf("set config")
+
+	config = make([]byte, len(newConfig))
+	copy(config, newConfig)
 	return nil
 }
 

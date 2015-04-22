@@ -3,16 +3,12 @@ FROM ubuntu
 RUN apt-get update
 RUN apt-get install -y dnsmasq
 
-CMD ["service dnsmasq restart && /bin/bash"]
+EXPOSE 53 8080
 
-# EXPOSE 53
+ADD agent     /agent
+RUN chmod +x  /agent/agentd
+RUN chmod +x  /agent/run.sh
 
-# RUN mkdir /app
-# ADD dnsmasq.conf /app/dnsmasq.conf
-# ADD agent/static/ /app/static/
-# ADD agentd /app/agentd
-# RUN chmod +x /usr/local/bin/agentd
+WORKDIR /agent/
 
-# WORKDIR /app/
-
-# CMD ["./agentd"]
+CMD ["/bin/bash","run.sh"]
