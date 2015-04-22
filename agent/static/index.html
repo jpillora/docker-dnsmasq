@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.12.0/css/semantic.css">
+    <link rel="stylesheet" href="app.css">
+  </head>
+  <body ng-app="dns" id="dns">
+      <div class="container">
+        <div class="ui basic segment">
+          <h2>dnsmasq!</h2>
+        </div>
+        <div class="ui basic editor segment">
+          <div id="editor"></div>
+          <div class="ui controls">
+            <div ng-click="update()" ng-class="{disabled: updating}" class="ui button">SAVE CHANGES</div>
+          </div>
+        </div>
+      </div>
+      <script src="app.js"></script>
+  </body>
+</html>
