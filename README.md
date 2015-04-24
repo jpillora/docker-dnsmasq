@@ -19,7 +19,7 @@ dnsmasq in a docker container, configurable via a simple web UI
 	server=8.8.8.8
 
 	#static entries
-	address=/myhost.company/10.0.0.1
+	address=/myhost.company/10.0.0.2
 	```
 
 1. Run the container
@@ -47,7 +47,7 @@ dnsmasq in a docker container, configurable via a simple web UI
 	Address: <docker-host>#53
 	Aliases:
 
-	myhost.company has address 10.0.0.1
+	myhost.company has address 10.0.0.2
 	```
 
 ### Notes
