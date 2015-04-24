@@ -15,14 +15,11 @@ import (
 var config []byte
 
 func main() {
+	//tag logs
+	log.SetPrefix("[agentd] ")
 	//restore initial config
-	initConfig, err := ioutil.ReadFile("dnsmasq.conf")
-	if err == nil && len(initConfig) > 0 {
-		err = load(initConfig)
-		if err != nil {
-			log.Printf("failed to load initial config, using default (%s)", err)
-		}
-	}
+	config, _ = ioutil.ReadFile("/etc/dnsmasq.conf")
+	exec.Command("service", "dnsmasq", "restart").Run()
 	//serve
 	http.HandleFunc("/configure", configure)
 	http.Handle("/", http.FileServer(http.Dir("static")))
