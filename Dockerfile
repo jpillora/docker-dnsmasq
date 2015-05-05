@@ -1,20 +1,21 @@
 FROM ubuntu:14.04
 MAINTAINER dev@jpillora.com
-
+#apt-gets
 RUN apt-get update
-RUN apt-get install -y dnsmasq supervisor
-
+RUN apt-get install -y dnsmasq supervisor wget
+#configure dnsmasq
 RUN echo -e "ENABLED=1\nIGNORE_RESOLVCONF=yes" > /etc/default/dnsmasq
 COPY dnsmasq.conf /etc/dnsmasq.conf
-
+#configure supervisor
 RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-RUN mkdir -p     /agent
-ADD agent/static /agent/static
-ADD agentd       /agent/agentd
-RUN chmod +x     /agent/agentd
-
-EXPOSE 53 8080
+#golang install
+RUN /usr/bin/wget -qO- https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+ENV GOPATH /root/go
+ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
+#copy over dnsmasq agent
+ADD agent /agent
+#compile it
+RUN cd /agent && go build -o agentd
 
 CMD ["/usr/bin/supervisord"]
