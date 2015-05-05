@@ -17,5 +17,5 @@ ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 ADD agent /agent
 #compile it
 RUN cd /agent && go build -o agentd
-
+#run supervisor!
 CMD ["/usr/bin/supervisord"]
