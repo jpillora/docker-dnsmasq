@@ -19,7 +19,9 @@ func main() {
 	log.SetPrefix("[agentd] ")
 	//restore initial config
 	config, _ = ioutil.ReadFile("/etc/dnsmasq.conf")
-	exec.Command("service", "dnsmasq", "restart").Run()
+	if err := exec.Command("service", "dnsmasq", "restart").Run(); err != nil {
+		log.Printf("initial dnsmasq restart failed: %s", err)
+	}
 	//serve
 	http.HandleFunc("/configure", configure)
 	http.Handle("/", http.FileServer(http.Dir("static")))

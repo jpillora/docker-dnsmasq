@@ -54,6 +54,8 @@ dnsmasq in a docker container, configurable via a simple web UI
 
 * All logs go to stdout so you'll find them in `docker logs dnsmasq`
 
+#### MIT License
+
 Copyright &copy; 2015 Jaime Pillora &lt;dev@jpillora.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
