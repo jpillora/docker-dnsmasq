@@ -31,7 +31,7 @@ dnsmasq in a docker container, configurable via a simple web UI
 		-p 53:53/udp \
 		-p 8080:8080 \
 		-v /opt/dnsmasq.conf:/etc/dnsmasq.conf \
-		jpillora/dnsmasq:0.1.0
+		quay.io/jpillora/dnsmasq:latest
 	```
 
 1. Visit `http://<docker-host>:8080` and you should see
