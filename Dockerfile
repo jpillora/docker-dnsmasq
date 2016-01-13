@@ -8,7 +8,7 @@ ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 ADD agent /agent
 #all installs then uninstalls in one! (docker has no ability to squash commits)
 RUN apt-get update && apt-get install --no-install-recommends -y dnsmasq ca-certificates curl supervisor && \
-	curl -s https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \
+	curl -s https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \
 	cd /agent && go build -o agentd && \
 	rm -rf /root/go && \
 	rm -rf /usr/local/go && \
@@ -23,4 +23,3 @@ RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 #run!
 CMD ["/usr/bin/supervisord"]
-
