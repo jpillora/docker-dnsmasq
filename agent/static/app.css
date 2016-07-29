@@ -28,7 +28,8 @@ button {
 	width: 66%;
 }
 
-#editor { 
+#editor {
+    font-family:monospace!important;
     position: absolute;
     top: 0;
     right: 0;
