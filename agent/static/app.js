@@ -21,7 +21,7 @@ function err(xhr) {
 }
 
 //load initial state
-$.get("/configure").then(function(cfg) {
+$.get("configure").then(function(cfg) {
   console.log("initialised");
   editor.setValue(cfg);
 }).fail(err);
@@ -35,7 +35,7 @@ save.on("click", function() {
   save.addClass("loading");
   var cfg = editor.getValue();
   //ajax
-  $.ajax({method: "POST", url:"/configure", processData:false, data:cfg}).then(function() {
+  $.ajax({method: "POST", url:"configure", processData:false, data:cfg}).then(function() {
     showhide($("#success"));
   }).fail(err).always(function() {
     save.removeClass("loading");
