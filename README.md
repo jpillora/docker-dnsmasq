@@ -5,13 +5,14 @@ dnsmasq in a docker container, configurable via a simple web UI
 
 ### Usage
 
-1. Create a `/opt/dnsmasq.conf` file on the Docker host
+1. Create a [`/opt/dnsmasq.conf`](http://oss.segetech.com/intra/srv/dnsmasq.conf) file on the Docker host
 
 	``` ini
 	#listen on container interface
 	listen-address=0.0.0.0
 	interface=eth0
 	user=root
+	log-queries
 
 	#only use these namesservers
 	no-resolv
@@ -31,7 +32,9 @@ dnsmasq in a docker container, configurable via a simple web UI
 		-p 53:53/udp \
 		-p 8080:8080 \
 		-v /opt/dnsmasq.conf:/etc/dnsmasq.conf \
-		quay.io/jpillora/dnsmasq-gui:latest
+		-e "USER=foo" \
+		-e "PASS=bar" \
+		jpillora/dnsmasq
 	```
 
 1. Visit `http://<docker-host>:8080` and you should see
