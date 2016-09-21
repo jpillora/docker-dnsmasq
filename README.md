@@ -39,7 +39,7 @@ dnsmasq in a docker container, configurable via a simple web UI
 
 1. Visit `http://<docker-host>:8080` and you should see
 
-	![screen shot 2015-04-24 at 3 55 17 pm](https://cloud.githubusercontent.com/assets/633843/7313188/5b6646b4-ea9a-11e4-90fa-e804dcc34922.png)
+	<img width="747" alt="screen shot 2016-09-22 at 1 39 01 am" src="https://cloud.githubusercontent.com/assets/633843/18718069/7d515392-8065-11e6-8ba5-86b6e59f3992.png">
 
 1. Test it out with
 
