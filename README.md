@@ -3,9 +3,13 @@
 
 dnsmasq in a docker container, configurable via a [simple web UI](https://github.com/jpillora/webproc)
 
-[![Docker Stars](https://img.shields.io/docker/stars/gliderlabs/alpine.svg)][dockerhub]
-[![Docker Pulls](https://img.shields.io/docker/pulls/gliderlabs/alpine.svg)][dockerhub]
+[![Docker Pulls](https://img.shields.io/docker/pulls/jpillora/dnsmasq.svg)][dockerhub]
 [![Image Size](https://img.shields.io/badge/docker%20image-11.76%20MB-blue.svg)][dockerhub]
+
+<!--
+no stars yet :(
+[![Docker Stars](https://img.shields.io/docker/stars/jpillora/dnsmasq.svg)][dockerhub]
+-->
 
 ### Usage
 
