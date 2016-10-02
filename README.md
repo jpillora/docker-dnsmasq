@@ -8,18 +8,18 @@ dnsmasq in a docker container, configurable via a simple web UI
 1. Create a [`/opt/dnsmasq.conf`](http://oss.segetech.com/intra/srv/dnsmasq.conf) file on the Docker host
 
 	``` ini
-	#listen on container interface
-	listen-address=0.0.0.0
-	interface=eth0
-	user=root
+	#dnsmasq config, for a complete example, see:
+	#  http://oss.segetech.com/intra/srv/dnsmasq.conf
+	#log all dns queries
 	log-queries
-
-	#only use these namesservers
+	#dont use hosts nameservers
 	no-resolv
+	#use google as default nameservers
 	server=8.8.4.4
 	server=8.8.8.8
-
-	#static entries
+	#serve all .company queries using a specific nameserver
+	server=/company/10.0.0.1
+	#explicitly define host-ip mappings
 	address=/myhost.company/10.0.0.2
 	```
 
@@ -30,16 +30,17 @@ dnsmasq in a docker container, configurable via a simple web UI
 		--name dnsmasq \
 		-d \
 		-p 53:53/udp \
-		-p 8080:8080 \
+		-p 5380:8080 \
 		-v /opt/dnsmasq.conf:/etc/dnsmasq.conf \
+		--log-opt "max-size=100m" \
 		-e "USER=foo" \
 		-e "PASS=bar" \
 		jpillora/dnsmasq
 	```
 
-1. Visit `http://<docker-host>:8080` and you should see
+1. Visit `http://<docker-host>:5380`, authenticate with `foo/bar` and you should see
 
-	<img width="747" alt="screen shot 2016-09-22 at 1 39 01 am" src="https://cloud.githubusercontent.com/assets/633843/18718069/7d515392-8065-11e6-8ba5-86b6e59f3992.png">
+	<img width="726" alt="screen shot 2016-10-02 at 10 27 46 pm" src="https://cloud.githubusercontent.com/assets/633843/19020264/c6d8eee8-88ef-11e6-9eee-c09aa07cad62.png">
 
 1. Test it out with
 
@@ -59,7 +60,7 @@ dnsmasq in a docker container, configurable via a simple web UI
 
 #### MIT License
 
-Copyright &copy; 2015 Jaime Pillora &lt;dev@jpillora.com&gt;
+Copyright &copy; 2016 Jaime Pillora &lt;dev@jpillora.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
