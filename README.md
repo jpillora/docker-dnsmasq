@@ -1,7 +1,11 @@
 
 # docker-dnsmasq
 
-dnsmasq in a docker container, configurable via a simple web UI
+dnsmasq in a docker container, configurable via a [simple web UI](https://github.com/jpillora/webproc)
+
+[![Docker Stars](https://img.shields.io/docker/stars/gliderlabs/alpine.svg)][dockerhub]
+[![Docker Pulls](https://img.shields.io/docker/pulls/gliderlabs/alpine.svg)][dockerhub]
+[![Image Size](https://img.shields.io/badge/docker%20image-11.76%20MB-blue.svg)][dockerhub]
 
 ### Usage
 
@@ -80,3 +84,6 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+[dockerhub]: https://hub.docker.com/r/jpillora/dnsmasq/
