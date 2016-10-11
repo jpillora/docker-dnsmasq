@@ -1,15 +1,9 @@
-
 # docker-dnsmasq
 
 dnsmasq in a docker container, configurable via a [simple web UI](https://github.com/jpillora/webproc)
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/jpillora/dnsmasq.svg)][dockerhub]
-[![Image Size](https://img.shields.io/badge/docker%20image-11.76%20MB-blue.svg)][dockerhub]
-
-<!--
-no stars yet :(
-[![Docker Stars](https://img.shields.io/docker/stars/jpillora/dnsmasq.svg)][dockerhub]
--->
+[![Image Size](https://images.microbadger.com/badges/image/jpillora/dnsmasq.svg)][dockerhub]
 
 ### Usage
 
@@ -61,10 +55,6 @@ no stars yet :(
 
 	myhost.company has address 10.0.0.2
 	```
-
-### Notes
-
-* All logs go to stdout so you'll find them in `docker logs dnsmasq`
 
 #### MIT License
 
