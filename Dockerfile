@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.6
 MAINTAINER dev@jpillora.com
 # webproc release settings
 ENV WEBPROC_VERSION 0.1.7
