@@ -37,6 +37,7 @@ dnsmasq in a docker container, configurable via a [simple web UI](https://github
 		--log-opt "max-size=100m" \
 		-e "USER=foo" \
 		-e "PASS=bar" \
+		--restart always \
 		jpillora/dnsmasq
 	```
 
