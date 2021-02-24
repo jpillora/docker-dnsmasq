@@ -5,7 +5,7 @@ dnsmasq in a docker container, configurable via a [simple web UI](https://github
 [![Docker Pulls](https://img.shields.io/docker/pulls/jpillora/dnsmasq.svg)][dockerhub]
 [![Image Size](https://images.microbadger.com/badges/image/jpillora/dnsmasq.svg)][dockerhub]
 
-### Usage
+## Usage
 
 1. Create a [`/opt/dnsmasq.conf`](http://oss.segetech.com/intra/srv/dnsmasq.conf) file on the Docker host
 
@@ -58,7 +58,7 @@ dnsmasq in a docker container, configurable via a [simple web UI](https://github
    myhost.company has address 10.0.0.2
    ```
 
-#### MIT License
+## MIT License
 
 Copyright &copy; 2018 Jaime Pillora &lt;dev@jpillora.com&gt;
 
