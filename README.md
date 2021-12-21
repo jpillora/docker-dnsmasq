@@ -12,6 +12,9 @@ dnsmasq in a docker container, configurable via a [simple web UI](https://github
    ```ini
    #dnsmasq config, for a complete example, see:
    #  http://oss.segetech.com/intra/srv/dnsmasq.conf
+   #uncomment to activate dnssec
+   #conf-file=/usr/share/dnsmasq/trust-anchors.conf
+   #dnssec
    #log all dns queries
    log-queries
    #dont use hosts nameservers
