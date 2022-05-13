@@ -1,13 +1,14 @@
 FROM alpine:edge
 LABEL maintainer="dev@jpillora.com"
 # webproc release settings
-ENV WEBPROC_VERSION 0.2.2
-ENV WEBPROC_URL https://github.com/jpillora/webproc/releases/download/$WEBPROC_VERSION/webproc_linux_amd64.gz
+ENV GITHUB_URL 'https://api.github.com/repos/jpillora/webproc/releases/latest'
+ENV JQ_SCRIPT '.assets[] | select(.browser_download_url | contains("linux_amd64")).browser_download_url'
+
 # fetch dnsmasq and webproc binary
 RUN apk update \
 	&& apk --no-cache add dnsmasq \
-	&& apk add --no-cache --virtual .build-deps curl \
-	&& curl -sL $WEBPROC_URL | gzip -d - > /usr/local/bin/webproc \
+	&& apk add --no-cache --virtual .build-deps curl jq \
+	&& curl -sL $GITHUB_URL | jq -r "$JQ_SCRIPT" | xargs -I% curl -sL % | gzip -d - > /usr/local/bin/webproc \
 	&& chmod +x /usr/local/bin/webproc \
 	&& apk del .build-deps
 #configure dnsmasq
