@@ -3,26 +3,25 @@
 dnsmasq in a docker container, configurable via a [simple web UI](https://github.com/jpillora/webproc)
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/jpillora/dnsmasq.svg)][dockerhub]
-[![Image Size](https://images.microbadger.com/badges/image/jpillora/dnsmasq.svg)][dockerhub]
+[![Image Size (latest)](https://img.shields.io/docker/image-size/jpillora/dnsmasq/latest)][dockerhub]
 
-### Usage
+## Usage
 
 1. Create a [`/opt/dnsmasq.conf`](http://oss.segetech.com/intra/srv/dnsmasq.conf) file on the Docker host
 
    ```ini
-   #dnsmasq config, for a complete example, see:
-   #  http://oss.segetech.com/intra/srv/dnsmasq.conf
-   #log all dns queries
+   # dnsmasq config, for a complete example, see: http://oss.segetech.com/intra/srv/dnsmasq.conf
+   # log all dns queries
    log-queries
-   #dont use hosts nameservers
+   # dont use hosts nameservers
    no-resolv
-   #use cloudflare as default nameservers, prefer 1^4
+   # use cloudflare as default nameservers, prefer 1^4
    server=1.0.0.1
    server=1.1.1.1
    strict-order
-   #serve all .company queries using a specific nameserver
+   # serve all .company queries using a specific nameserver
    server=/company/10.0.0.1
-   #explicitly define host-ip mappings
+   # explicitly define host-ip mappings
    address=/myhost.company/10.0.0.2
    ```
 
@@ -58,7 +57,15 @@ dnsmasq in a docker container, configurable via a [simple web UI](https://github
    myhost.company has address 10.0.0.2
    ```
 
-#### MIT License
+## How to build the image.
+
+Follow the guide - https://docs.docker.com/build/building/multi-platform/ or execut the command:
+
+```
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <username>/<image>:latest --push .
+```
+
+## MIT License
 
 Copyright &copy; 2018 Jaime Pillora &lt;dev@jpillora.com&gt;
 
