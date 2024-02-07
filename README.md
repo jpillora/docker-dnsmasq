@@ -3,7 +3,6 @@
 dnsmasq in a docker container, configurable via a [simple web UI](https://github.com/jpillora/webproc)
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/jpillora/dnsmasq.svg)][dockerhub]
-[![Image Size](https://images.microbadger.com/badges/image/jpillora/dnsmasq.svg)][dockerhub]
 
 ### Usage
 
@@ -56,6 +55,14 @@ dnsmasq in a docker container, configurable via a [simple web UI](https://github
    Aliases:
 
    myhost.company has address 10.0.0.2
+   ```
+
+1. Apply new DNS records
+
+   You can reload the dnsmasq service without restarting the container with the following command:
+
+   ```
+   docker exec dnsmasq pkill -HUP dnsmasq
    ```
 
 #### MIT License
