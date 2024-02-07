@@ -57,6 +57,14 @@ dnsmasq in a docker container, configurable via a [simple web UI](https://github
    myhost.company has address 10.0.0.2
    ```
 
+1. Apply new DNS records
+
+   You can reload the dnsmasq service without restarting the container with the following command:
+
+   ```
+   docker exec dnsmasq pkill -HUP dnsmasq
+   ```
+
 #### MIT License
 
 Copyright &copy; 2018 Jaime Pillora &lt;dev@jpillora.com&gt;
